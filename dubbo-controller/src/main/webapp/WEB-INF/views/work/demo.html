@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" />
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="/resource/common/css/default.css"  th:href="@{/resource/common/css/default.css}"/>
+    <script type="text/javascript" src="/resource/common/lib/head/head.min.js"
+            th:src="@{/resource/common/lib/head/head.min.js}"></script>
+    <script type="text/javascript" src="/resource/common/js/default.js"
+            th:src="@{/resource/common/js/default.js}"></script>
+
+    <script type="text/javascript">
+        head.ready(function () {
+            //初始化加载
+            // 使用 Vue
+            var app = new Vue({
+                el: '#vue-app',
+                data: {
+                    message: 'What a fucking day!'
+                },
+                methods: {
+                    reverseMessage: function() {
+                        this.message = this.message.split(' ').reverse().join(' ');
+                    }
+                }
+            });
+
+            $('#tl-button').click(function(event) {
+                // 使用 ArtTemplate
+                $('#vue-app').append(template('tl-foo', {
+                    message: 'Hello'
+                }));
+            });
+        });
+    </script>
+    <script id="tl-foo" type="text/template">
+        {{message}}
+    </script>
+    <title>工作台</title>
+</head>
+<body>
+<!-- Vue 使用的模版 -->
+<div id="vue-app">
+    <button v-on:click="reverseMessage">Reverse</button>
+    {{message}}
+</div>
+
+<button id="tl-button">使用 ArtTemplate 模版</button>
+<!-- ArtTemplate 使用的模版 -->
+
+</body>
+</html>

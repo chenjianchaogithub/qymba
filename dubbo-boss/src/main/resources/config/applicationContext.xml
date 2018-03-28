@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 让Spring通过自动扫描来查询和管理Bean -->
+    <context:component-scan base-package="com.qymba"/>
+    <!-- AOP 日志切面执行需要先于事务 -->
+    <!--<aop:config>
+        <aop:aspect id="loggerAspect" ref="logger" order="1">
+            <aop:around method="record" pointcut="@annotation(logging)"/>
+        </aop:aspect>
+    </aop:config>-->
+
+    <!-- 引入文件 -->
+  <import resource="applicationContext-*.xml"/>
+</beans>

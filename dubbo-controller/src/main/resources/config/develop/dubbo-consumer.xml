@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+<dubbo:application name="dubbo-controller"/>
+
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+ 	
+ 	<!-- check参数，不检查提供者是否存在 -->
+	<!--<dubbo:reference check="false" id="testDubboService" interface="com.feinno.manage.service.testDubboService" timeout="10000"/>-->
+    <!--<dubbo:reference check="false" id="dubboCartService" interface="com.jt.dubbo.cart.DubboCartService" timeout="10000"/>
+	<dubbo:reference check="false" id="dubboxOrderService" interface="com.jt.dubbo.order.DubboxOrderService" timeout="10000"/>-->
+
+	<dubbo:annotation package="com.qymba" />
+
+	<dubbo:reference id="studentApi" interface="com.qymba.api.StudentApi"  group="student-min" version="1.0.0" timeout="100000" check="false"/>
+
+</beans>

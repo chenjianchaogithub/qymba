@@ -1,0 +1,17 @@
+.DS_Store
+.idea
+.vscode
+*.iml
+.settings
+.project
+target
+.classpath
+**/WEB-INF/classes
+**/WEB-INF/lib
+logs
+**/WebRoot/basedata/area.json_*
+document/~*
+document/Icon
+*.log
+**/build/
+
