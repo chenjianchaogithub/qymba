@@ -53,6 +53,8 @@
         <dep.ver.httpclient>4.5.2</dep.ver.httpclient>
 
         <dep.ver.fastjson>1.2.11</dep.ver.fastjson>
+        <dep.ver.shiro>1.2.5</dep.ver.shiro>
+
 
         <plg.ver.maven-resources-plugin>2.7</plg.ver.maven-resources-plugin>
         <plg.ver.maven-compiler-plugin>2.5.1</plg.ver.maven-compiler-plugin>
@@ -415,6 +417,27 @@
                         <artifactId>commons-logging</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${dep.ver.shiro}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${dep.ver.shiro}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${dep.ver.shiro}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+                <version>${dep.ver.shiro}</version>
             </dependency>
             <dependency>
                 <groupId>com.qymba</groupId>

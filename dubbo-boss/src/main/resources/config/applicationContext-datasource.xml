@@ -58,7 +58,7 @@
     </bean>
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.qymba.mapper*" />
+        <property name="basePackage" value="com.hzs.qymba.mapper*" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!--<mybatis:scan base-package="com.hy.mapper"/>-->

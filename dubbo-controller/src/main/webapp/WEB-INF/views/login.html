@@ -11,6 +11,78 @@
   <link rel="Shortcut Icon" href="/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="/resource/common/css/login.css"  th:href="@{/resource/common/css/login.css}"/>
 
+  <script type="text/javascript" src="/resource/common/lib/head/head.min.js"
+          th:src="@{/resource/common/lib/head/head.min.js}"></script>
+
+  <script type="text/javascript" src="/resource/common/js/login.js"
+          th:src="@{/resource/common/js/login.js}"></script>
+
+  <script type="text/javascript">
+
+      /**
+       * 保存后，执行回调
+       * @param responseText
+       * @param statusText
+       * @param xhr
+       * @param $form
+       */
+      function showResponse(data, statusText, xhr, $form){
+          if(data.status == "0"){
+              /**
+               * 请求成功后的操作
+               */
+              alert(data.msg);
+              window.location = '/checkin.html';
+          } else {
+              alert(data.error);
+          }
+      }
+
+      head.ready(function () {
+          var options = {
+              type: $("#login").attr('method'),
+              url: $("#login").attr('action'),
+              success:showResponse,
+              dataType: 'json',
+              error : function(xhr, status, err) {
+                  alert("登陆时服务器异常！");
+              }
+          };
+
+          //初始化加载
+          var vPwd = $('#password').val();
+          $('#password').val($.md5(vPwd));
+
+          $("#login").submit(function(){
+              $('#password').val($.md5($('#password').val()));
+
+              if ($.trim($('#username').val()).length==0) {
+                  //err('请输入用户登录名');
+                  $('#username').focus();
+                  return false;
+              }
+              if ($.trim($('#password').val()).length==0) {
+                  //err('请输入登录密码');
+                  $('#password').focus();
+                  return false;
+              }
+              if ($.trim($('#chkcode').val()).length==0) {
+                  //err('请输入验证码');
+                  $('#chkcode').focus();
+                  return false;
+              }
+
+              $(this).ajaxSubmit(options);
+
+              return false;
+          });
+
+          $('input[name="smt"]').click(function () {
+              $("#login").submit();
+          });
+      });
+  </script>
+
 <title>后台登录 - H-ui.admin v3.1</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载"/>
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。"/>
@@ -20,22 +92,22 @@
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="index.html" method="post">
+    <form class="form form-horizontal" id="login" action="checkin.html" method="POST">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="username" name="" type="text" placeholder="账户" class="input-text size-L"/>
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L"/>
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="psw" name="" type="password" placeholder="密码" class="input-text size-L"/>
+          <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L"/>
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;"/>
+          <input class="input-text size-L" id="chkcode" name="chkcode" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;"/>
           <img src=""/> <a id="kanbuq" href="javascript:void(0);">看不清，换一张</a> </div>
       </div>
       <div class="row cl">
@@ -47,7 +119,7 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
+          <input name="smt" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
         </div>
       </div>

@@ -6,7 +6,8 @@
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 让Spring通过自动扫描来查询和管理Bean -->
-    <context:component-scan base-package="com.qymba"/>
+    <context:component-scan base-package="com.hzs"/>
+
     <!-- AOP 日志切面执行需要先于事务 -->
     <!--<aop:config>
         <aop:aspect id="loggerAspect" ref="logger" order="1">

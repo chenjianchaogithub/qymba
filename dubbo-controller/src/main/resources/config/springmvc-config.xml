@@ -22,7 +22,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- 配置扫描器，使得@Controller注解生效 -->
-	<context:component-scan base-package="com.qymba" />
+	<context:component-scan base-package="com.hzs" />
 
 	<!-- 定义视图解析器 -->
 	<!-- prefix="/WEB-INF/jsp/", suffix=".jsp", viewname="test" -> "/WEB-INF/jsp/test.jsp" -->
@@ -106,7 +106,6 @@
 	<mvc:default-servlet-handler />
 
 	<import resource="classpath:config/dubbo-consumer.xml"/>
-	<!--<import resource="classpath:config/spring-shiro.xml"/>-->
 
 	<!--&lt;!&ndash; 配置购物车的拦截器 &ndash;&gt;
 	<mvc:interceptors>

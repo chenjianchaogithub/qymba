@@ -30,9 +30,12 @@
 	<!-- 
 	 <dubbo:annotation package="com.jt.dubbo.cart.rest.service.impl" />
  	-->
-	<dubbo:annotation package="com.qymba" />
+	<dubbo:annotation package="com.hzs.qymba" />
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="com.qymba.api.StudentApi" ref="studentBiz" group="student-min" version="1.0.0" timeout="100000"/>
+	<dubbo:service interface="com.hzs.qymba.api.StudentApi" ref="studentBiz" group="student-min" version="1.0.0" timeout="100000"/>
 
-	
+	<!-- 用户服务接口 -->
+	<dubbo:service interface="com.hzs.qymba.api.UserApi" ref="userBiz" group="user-min" version="1.0.0" timeout="100000"/>
+
+
 </beans>

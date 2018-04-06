@@ -15,8 +15,10 @@
     <!--<dubbo:reference check="false" id="dubboCartService" interface="com.jt.dubbo.cart.DubboCartService" timeout="10000"/>
 	<dubbo:reference check="false" id="dubboxOrderService" interface="com.jt.dubbo.order.DubboxOrderService" timeout="10000"/>-->
 
-	<dubbo:annotation package="com.qymba" />
+	<dubbo:annotation package="com.hzs" />
 
-	<dubbo:reference id="studentApi" interface="com.qymba.api.StudentApi"  group="student-min" version="1.0.0" timeout="100000" check="false"/>
+	<dubbo:reference id="studentApi" interface="com.hzs.qymba.api.StudentApi" group="student-min" version="1.0.0" timeout="100000" check="false"/>
+	<!-- 用户消费接口 -->
+	<dubbo:reference id="userApi" interface="com.hzs.qymba.api.UserApi" group="user-min" version="1.0.0" timeout="100000" check="false"/>
 
 </beans>
