@@ -7,6 +7,8 @@ head.js('/resource/common/lib/jquery.contextmenu/jquery.contextmenu.r2.js');//�
 head.js('/resource/common/lib/vue/2.0/min/vue.min.js');//vue前端框架引入（适用于移动端）
 head.js('/resource/common/lib/art-template/4.12.2/lib/template-web.js');//模板引入
 head.js('/resource/common/lib/datatables/1.10.0/jquery.dataTables.min.js');//列表组件
+head.js('/resource/common/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js');//树列表组件
+
 
 
 

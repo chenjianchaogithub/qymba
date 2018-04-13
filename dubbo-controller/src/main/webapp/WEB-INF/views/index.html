@@ -19,8 +19,22 @@
 	<script type="text/javascript">
         head.ready(function () {
            //初始化加载
-
+            getMain();
         });
+        
+        function getMain() {
+			$.ajax({
+				url:'main.html',
+                type:'POST',
+                dataType:"json",
+				success:function(result){
+				    alert(1);
+                    console.log(result);
+                    //$('.nav').html(template('tmplMainNav', result));
+                    document.querySelector('#menu').innerHTML=template('tmplMainNav',result);
+                }
+			});
+        }
         /*个人信息*/
         function myselfinfo(){
             layer.open({
@@ -80,6 +94,42 @@
 	<title>H-ui.admin v3.1</title>
 	<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载"/>
 	<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。"/>
+
+	<!-- 一级菜单 -->
+	<script id="tmplMainNav" type="text/html">
+		<ul class="cl">
+			{{each navs}}
+			<li class="dropDown dropDown_hover">
+				<a href="{{$value.href}}" class="dropDown_A">
+					<i class="Hui-iconfont">&#xe600;</i> {{$value.name}} <i class="Hui-iconfont">&#xe6d5;</i>
+				</a>
+				{{include 'tmplMainNavChildren' $value}}
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<!-- 二级菜单 -->
+	<script id="tmplMainNavChildren" type="text/html">
+		<ul class="dropDown-menu menu radius box-shadow">
+			{{each childList}}
+				<li><a href="{{$value.href}}"><i class="Hui-iconfont">&#xe616;</i> {{$value.name}}</a>
+				{{include 'tmplMainNavChildrens' $value}}
+				</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<!-- 三级菜单 -->
+	<script id="tmplMainNavChildrens" type="text/html">
+		<ul class="menu">
+			<li><a href="javascript:article_add('添加资讯','/menu/list.html');" > 菜单管理</a></li>
+			<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')">资讯1</a></li>
+		</ul>
+
+	</script>
+
+
 </head>
 <body>
 <header class="navbar-wrapper">
@@ -87,17 +137,19 @@
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-			<nav class="nav navbar-nav">
+
+
+
+			<nav class="nav navbar-nav" id="menu">
+
 				<ul class="cl">
 					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-					</ul>
-				</li>
-			</ul>
+						</ul>
+					</li>
+				</ul>
+
 		</nav>
 		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">

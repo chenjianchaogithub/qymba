@@ -37,5 +37,8 @@
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.hzs.qymba.api.UserApi" ref="userBiz" group="user-min" version="1.0.0" timeout="100000"/>
 
+	<!-- 用户服务接口 -->
+	<dubbo:service interface="com.hzs.qymba.api.MenuApi" ref="menuBiz" group="menu-min" version="1.0.0" timeout="100000"/>
+
 
 </beans>

@@ -2,8 +2,11 @@ package com.hzs.qymba.controller;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.hzs.qymba.api.MenuApi;
 import com.hzs.qymba.api.UserApi;
+import com.hzs.qymba.dto.MenuDTO;
 import com.hzs.qymba.model.LoginToken;
+import com.util.Tree;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -28,6 +32,10 @@ public class GlobalController {
 
     @Resource
     private UserApi userApi;
+
+    @Resource
+    private MenuApi menuApi;
+
     /**
      * 重新登录
      *
@@ -128,5 +136,46 @@ public class GlobalController {
             throw new OperationException("登陆超时，请重新登陆！");*/
 
         return "index";
+    }
+
+    @RequestMapping(value = "main", method = RequestMethod.POST)
+    @ResponseBody
+    //@JsonView(Main.class)
+    public Object main(HttpServletRequest request)  {
+
+        Map<String, Object> result = new WeakHashMap<String, Object>();
+        //boolean hasLogin = Online.hasLogin() || userService.checkAutoLogin();
+        // 是否已登录
+        /*result.put("login", hasLogin);
+        // 如果未登录的是否要求验证码
+        if (!hasLogin) {
+            result.put("chkcode", RandomCreater.mustCheckCode(request));
+            return result;
+        }*/
+
+        // 当前用户菜单
+        List<MenuDTO>  list = menuApi.selectAll();
+        List<MenuDTO>  menus= Tree.getTreeList(Long.parseLong("0"),list);
+        result.put("navs",menus);
+
+        //result.put("user", currUser());
+        // 权限设置
+        // TODO 考虑不把权限点返回前端
+        /*Map<String, Object> prms = new HashMap<String, Object>();
+        prms.put("CW_ZJ_TZ", Prm.has(P.CW_ZJ_TZ));
+        prms.put("CW_WG_TZ", Prm.has(P.CW_WG_TZ));
+        prms.put("CW_ZJ_SK", Prm.has(P.CW_ZJ_SK));
+        prms.put("CW_WG_SK", Prm.has(P.CW_WG_SK));
+        prms.put("CW_ZJ_SK_ADD", Prm.has(P.CW_ZJ_SK_ADD));
+        prms.put("ROOM_LIST", Prm.has(P.ROOM_LIST));
+        // 收取物管账款的权限
+        prms.put("CW_WG_SK_ADD", Prm.has(P.CW_WG_SK_ADD));
+        // 收款押金账款的权限
+        prms.put("CW_YJ_SK", Prm.has(P.CW_YJ_SK));
+        result.put("prms", prms);
+        // 账套配置
+        result.put("setting", settingService.mySetting());*/
+
+        return result;
     }
 }
