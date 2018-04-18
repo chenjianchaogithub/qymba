@@ -3,11 +3,24 @@ package com.hzs.qymba.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserDTO implements Serializable{
+import com.core.regular.BaseRegular;
+import com.core.validator.GrpAdd;
+import com.core.validator.GrpMod;
+import com.core.validator.UserClass;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
+
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+@UserClass(groups={ GrpAdd.class, GrpMod.class } ,message=" error info ")
+public class UserDTO implements Serializable,BaseRegular{
+
+    @JsonView({BaseList.class})
     private Long id;
 
+    @JsonView({BaseList.class})
     private String name;
 
+    @JsonView({BaseList.class})
     private String username;
 
     private String password;
@@ -28,6 +41,7 @@ public class UserDTO implements Serializable{
 
     private Long stid;
 
+    @JsonView({BaseList.class})
     private String email;
 
     private static final long serialVersionUID = 1L;

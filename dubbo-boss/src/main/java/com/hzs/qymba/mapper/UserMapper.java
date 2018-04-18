@@ -4,6 +4,8 @@ package com.hzs.qymba.mapper;
 import com.hzs.qymba.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -27,4 +29,10 @@ public interface UserMapper {
     User authentication(@Param("username") String username,
                         @Param("password") String password);
 
+
+    /**
+     * 查询所有用户列表
+     * @return
+     */
+    List<User> selectAll();
 }

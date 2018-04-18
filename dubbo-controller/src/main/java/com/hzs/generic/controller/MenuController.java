@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/menu")
-public class Menu {
+public class MenuController {
 
     /**
      * 列表界面

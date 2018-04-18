@@ -15,6 +15,7 @@
     <result column="openid" property="openid" jdbcType="VARCHAR" />
     <result column="stid" property="stid" jdbcType="BIGINT" />
     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="BIGINT" />
   </resultMap>
 
   <!-- 登录验证的信息  -->
@@ -27,6 +28,11 @@
     stid, email
   </sql>
 
+  <!-- 分页列表的信息 -->
+  <sql id="Page_Column_List">
+    id, name, username, state, date_format(creatTime, '%Y-%m-%d') AS  creatTime , mob,  userType, deptId, dept
+  </sql>
+
   <!-- 用户登录验证查询 -->
   <select id="authentication" resultMap="BaseResultMap" parameterType="java.util.Map">
     SELECT <include refid="Login_Token_Column" />
@@ -36,6 +42,21 @@
     OR email = #{username,jdbcType=VARCHAR}
     ) AND password = #{password,jdbcType=VARCHAR}
     AND state=0	limit 0,1
+  </select>
+
+  <!-- 查找所有可用的用户 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT
+    <include refid="Page_Column_List" />
+    FROM user_t
+    <where>
+      <![CDATA[
+			AND state <> 2
+
+			AND ( username <> 'super' OR username is null)
+		]]>
+    </where>
+    ORDER BY parentid, CONVERT(username USING GBK) ASC, id
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

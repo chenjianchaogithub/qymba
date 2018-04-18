@@ -54,7 +54,7 @@
 
         <dep.ver.fastjson>1.2.11</dep.ver.fastjson>
         <dep.ver.shiro>1.2.5</dep.ver.shiro>
-
+        <dep.jackson.version>2.5.0</dep.jackson.version>
 
         <plg.ver.maven-resources-plugin>2.7</plg.ver.maven-resources-plugin>
         <plg.ver.maven-compiler-plugin>2.5.1</plg.ver.maven-compiler-plugin>
@@ -323,6 +323,24 @@
                 <artifactId>jackson-mapper-asl</artifactId>
                 <version>${dep.ver.jackson}</version>
             </dependency>
+
+            <!-- jsonview -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+
             <!-- jackson -->
             <!-- aspectj -->
             <dependency>

@@ -28,10 +28,14 @@
                 type:'POST',
                 dataType:"json",
 				success:function(result){
-				    alert(1);
                     console.log(result);
                     //$('.nav').html(template('tmplMainNav', result));
                     document.querySelector('#menu').innerHTML=template('tmplMainNav',result);
+                    /*选项卡导航*/
+                    $(".dropDown-menu").on("click",".menu a",function(){
+                        Hui_admin_tab(this);
+                    });
+
                 }
 			});
         }
@@ -123,8 +127,7 @@
 	<!-- 三级菜单 -->
 	<script id="tmplMainNavChildrens" type="text/html">
 		<ul class="menu">
-			<li><a href="javascript:article_add('添加资讯','/menu/list.html');" > 菜单管理</a></li>
-			<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')">资讯1</a></li>
+			<li><a data-href="/menu/list.html" data-title="菜单管理" href="javascript:void (0);" > 菜单管理</a></li>
 		</ul>
 
 	</script>
@@ -178,25 +181,34 @@
 	</div>
 </div>
 </header>
-<!--<aside class="Hui-aside">
+<aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe616;</i> 机会管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
-			</ul>
+					<li><a data-href="article-list.html" data-title="机会列表" href="javascript:void(0)">机会列表</a></li>
+				</ul>
 		</dd>
 	</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+	<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe613;</i> 客户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="picture-list.html" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
-			</ul>
+					<li><a data-href="picture-list.html" data-title="客户列表" href="javascript:void(0)">客户列表</a></li>
+					<li><a data-href="picture-list.html" data-title="联系人列表" href="javascript:void(0)">联系人列表</a></li>
+				</ul>
 		</dd>
 	</dl>
-		<dl id="menu-product">
+	<dl id="menu-user">
+			<dt><i class="Hui-iconfont">&#xe613;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="user/list.html" data-title="用户列表" href="javascript:void(0)">用户列表</a></li>
+				</ul>
+			</dd>
+	</dl>
+	<!--	<dl id="menu-product">
 			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
@@ -264,12 +276,11 @@
 					<li><a data-href="system-log.html" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
 			</ul>
 		</dd>
-	</dl>
+	</dl>-->
 </div>
-</aside>-->
-<!--
+</aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
--->
+
 <section class="Hui-article-box">
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">

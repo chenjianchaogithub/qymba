@@ -30,6 +30,8 @@ public class User implements Serializable {
 
     private String email;
 
+    private Long parentid;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -134,5 +136,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public Long getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Long parentid) {
+        this.parentid = parentid;
     }
 }
