@@ -10,6 +10,7 @@ import com.hzs.qymba.dto.UserDTO;
 import com.util.ParamMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +38,6 @@ public class UserController extends GenericController{
      */
     @RequestMapping("/list")
     public String list(Model model, HttpServletRequest request){
-        System.out.println("list");
-        List<UserDTO> list = userApi.selectAll();
         return "user/list";
     }
 
@@ -51,17 +50,30 @@ public class UserController extends GenericController{
     public @ResponseBody Object ajax(HttpServletRequest request){
         Map<String,Object> map = new HashMap<String,Object>();
         ParamMap param = getParamMap(request);
-        // 关键字拆分
+        // 关键字拆分   pageSize、currentPage、page
         param.changeKeywords("keyword");
 
-        List<UserDTO> list = userApi.selectAll();
-        map.put("draw", 1);
-        map.put("recordsTotal", list.size());
-        map.put("recordsFiltered", list.size());
-        map.put("data", list );
-
         // 选择用于过滤该类型用户列表的视图类
-        return  jsonView(map,BaseRegular.BaseList.class);
+        return  jsonView(userApi.selectPager(param),BaseRegular.BaseList.class);
         //return map;
+    }
+
+    /**
+     * 新增界面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/add")
+    public String add(Model model, HttpServletRequest request){
+        return "user/add";
+    }
+
+
+
+    @RequestMapping(value = "/info/{id}", method = RequestMethod.POST)
+    public @ResponseBody Object info(@PathVariable("id") Long id){
+        UserDTO userDTO =  userApi.selectByUserId(id);
+        return userApi.selectByUserId(id);
     }
 }

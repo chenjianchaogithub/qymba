@@ -8,13 +8,13 @@ import com.hzs.qymba.api.UserApi;
 import com.hzs.qymba.dto.UserDTO;
 import com.hzs.qymba.model.User;
 import com.hzs.qymba.service.UserService;
+import com.util.ParamMap;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserBiz implements UserApi {
@@ -45,7 +45,33 @@ public class UserBiz implements UserApi {
 
     @Override
     public List<UserDTO> selectAll() {
-        List<User> userList = userService.selectAll();
+        return gsonList(userService.selectAll());
+    }
+
+    @Override
+    public Map<String, Object> selectPager(ParamMap param) {
+        Map<String, Object> rs = new HashMap<String, Object>();
+        // 统计总条数
+        long total = userService.selectCount(param);
+        // 翻页计算记录起始
+        param.turnPage(total);
+        // 获取结果
+        rs.put("total", total);
+        rs.put("rows", gsonList(userService.selectList(param)));
+        return rs;
+    }
+
+    @Override
+    public UserDTO selectByUserId(Long id) {
+        return gsonObject(userService.selectByUserId(id));
+    }
+
+    /**
+     * 类型转换
+     * @param userList
+     * @return
+     */
+    private List<UserDTO> gsonList(List<User> userList){
         List<UserDTO> userDTOList = new ArrayList<UserDTO>();
         Gson gs = new Gson();
         for (User user:userList){
@@ -54,5 +80,12 @@ public class UserBiz implements UserApi {
             userDTOList.add(userDTO);
         }
         return userDTOList;
+    }
+
+    private UserDTO gsonObject(User user){
+        Gson gs = new Gson();
+        String userStr = gs.toJson(user);
+        UserDTO userDTO = gs.fromJson(userStr,UserDTO.class);
+        return userDTO;
     }
 }

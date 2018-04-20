@@ -27,10 +27,13 @@ public class UserDTO implements Serializable,BaseRegular{
 
     private Integer state;
 
-    private Date creattime;
+    @JsonView({BaseList.class})
+    private String creattime;
 
+    @JsonView({BaseList.class})
     private String mob;
 
+    @JsonView({BaseList.class})
     private Integer usertype;
 
     private Long deptid;
@@ -86,11 +89,11 @@ public class UserDTO implements Serializable,BaseRegular{
         this.state = state;
     }
 
-    public Date getCreattime() {
+    public String getCreattime() {
         return creattime;
     }
 
-    public void setCreattime(Date creattime) {
+    public void setCreattime(String creattime) {
         this.creattime = creattime;
     }
 

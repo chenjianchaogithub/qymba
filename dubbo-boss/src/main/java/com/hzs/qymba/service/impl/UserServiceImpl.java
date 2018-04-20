@@ -3,11 +3,14 @@ package com.hzs.qymba.service.impl;
 import com.hzs.qymba.mapper.UserMapper;
 import com.hzs.qymba.model.User;
 import com.hzs.qymba.service.UserService;
+import com.util.ParamMap;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,5 +42,21 @@ public class UserServiceImpl implements UserService {
 
     public List<User> selectAll(){
         return userMapper.selectAll();
+    }
+
+
+    @Override
+    public long selectCount(ParamMap param) {
+        return userMapper.selectCount(param);
+    }
+
+    @Override
+    public List<User> selectList(ParamMap param) {
+        return userMapper.selectList(param);
+    }
+
+    @Override
+    public User selectByUserId(Long id) {
+        return userMapper.selectByUserId(id);
     }
 }

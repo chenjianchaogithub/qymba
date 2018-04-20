@@ -33,6 +33,52 @@
     id, name, username, state, date_format(creatTime, '%Y-%m-%d') AS  creatTime , mob,  userType, deptId, dept
   </sql>
 
+  <sql id="User_List_Page">
+    <where>
+      <!--
+      <if test="state!=null and state!='' " >
+       and state in (
+           <foreach collection="state" item="s" separator=",">
+              #{s, jdbcType=INTEGER}
+          </foreach>
+       )
+      </if>
+      -->
+      <!-- <if test="roleid!=null and roleid!='' " >
+       AND id IN ( SELECT userid FROM user_role_r WHERE roleid = #{roleid, jdbcType=BIGINT} )
+      </if> -->
+      <if test="state!=null and state!='' " >
+        AND state = #{state, jdbcType=INTEGER}
+      </if>
+      <if test="usertype!=null and usertype!='' " >
+        AND usertype = #{usertype, jdbcType=INTEGER}
+      </if>
+      <if test="currid!=null and currid!='' " >
+        AND id != #{currid, jdbcType=BIGINT}
+      </if>
+      <if test="deptid!=null and deptid!='' " >
+        AND deptid = #{deptid, jdbcType=BIGINT}
+      </if>
+      <!--<if test="roleid!=null and roleid!='' " >
+        AND id in ( SELECT userid FROM user_role_r WHERE roleid = #{roleid, jdbcType=BIGINT} )
+      </if>-->
+      <![CDATA[
+			AND name<>'super'
+	  ]]>
+      <if test="keyword!=null and keyword!=''">
+        AND
+        <foreach collection="keyword" item="keyword"
+                 separator="OR" open="(" close=")" index="">
+          name LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+          OR username LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+        </foreach>
+      </if>
+      <if test="stid!=null and stid!='' " >
+        AND stid = #{stid, jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
   <!-- 用户登录验证查询 -->
   <select id="authentication" resultMap="BaseResultMap" parameterType="java.util.Map">
     SELECT <include refid="Login_Token_Column" />
@@ -57,6 +103,38 @@
 		]]>
     </where>
     ORDER BY parentid, CONVERT(username USING GBK) ASC, id
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Long">
+    SELECT count(id) FROM user_t
+
+    <include refid="User_List_Page" />
+  </select>
+
+  <!-- 后台用户列表显示 SQL-->
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    SELECT <include refid="Page_Column_List" />
+    FROM user_t
+
+    <include refid="User_List_Page" />
+
+    <if test="sortName!=null and sortName!='' ">
+      Order By creatTime DESC,Convert(${sortName} using GBK) ${sortOrder}
+    </if>
+    <if test="sortName==null or sortName=='' ">
+      ORDER BY user_t.id DESC
+    </if>
+    <if test="startCount!=null and pageSize!=null" >
+      LIMIT ${startCount}, ${pageSize}
+    </if>
+  </select>
+
+  <!-- 根据用户id,查询授权的权限点 -->
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from user_t
+    where id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
