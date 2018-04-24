@@ -36,6 +36,8 @@ public class MenuBiz implements MenuApi {
             menuDTO.setId(menu.getId());
             menuDTO.setName(menu.getName());
             menuDTO.setParentid(menu.getParentid());
+            menuDTO.setCode(menu.getCode());
+            menuDTO.setPcode(menu.getPcode());
             menuDTOList.add(menuDTO);
         }
         return menuDTOList;

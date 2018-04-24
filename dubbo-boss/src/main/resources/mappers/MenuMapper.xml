@@ -16,12 +16,13 @@
     <result column="dialog" property="dialog" jdbcType="BIT" />
     <result column="curr" property="curr" jdbcType="BIT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="pcode" property="pcode" jdbcType="VARCHAR" />
     <result column="stid" property="stid" jdbcType="BIGINT" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, name, className, icon, description, href, target, permissions, parentId, orderId, 
-    state, dialog, curr, code, stid
+    state, dialog, curr, code, pcode, stid
   </sql>
 
   <!-- 用户正常登录后的菜单 -->

@@ -31,6 +31,8 @@ public class Menu implements Serializable {
 
     private String code;
 
+    private String pcode;
+
     private Long stid;
 
 
@@ -147,6 +149,14 @@ public class Menu implements Serializable {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public String getPcode() {
+        return pcode;
+    }
+
+    public void setPcode(String pcode) {
+        this.pcode = pcode;
     }
 
     public Long getStid() {

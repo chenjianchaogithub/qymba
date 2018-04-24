@@ -35,6 +35,8 @@ public class MenuDTO  implements TreeEntity<MenuDTO>, Serializable{
 
     private String code;
 
+    private String pcode;
+
     private Long stid;
 
     public List<MenuDTO> childList;
@@ -151,6 +153,14 @@ public class MenuDTO  implements TreeEntity<MenuDTO>, Serializable{
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public String getPcode() {
+        return pcode;
+    }
+
+    public void setPcode(String pcode) {
+        this.pcode = pcode;
     }
 
     public Long getStid() {

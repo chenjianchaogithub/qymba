@@ -69,11 +69,13 @@ public class UserController extends GenericController{
         return "user/add";
     }
 
-
-
+    /**
+     * 查询用户数据
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/info/{id}", method = RequestMethod.POST)
     public @ResponseBody Object info(@PathVariable("id") Long id){
-        UserDTO userDTO =  userApi.selectByUserId(id);
         return userApi.selectByUserId(id);
     }
 }

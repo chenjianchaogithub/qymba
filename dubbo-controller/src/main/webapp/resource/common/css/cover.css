@@ -1,3 +1,25 @@
 @charset "utf-8";
 
 .has-switch {    min-width: 0px;}
+
+/*多级菜单列表图标*/
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family:"Hui-iconfont" !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-right:before {
+    content: "\e6d7";
+}
+.glyphicon-chevron-down:before {
+    content: "\e6d5";
+}
+
+
+

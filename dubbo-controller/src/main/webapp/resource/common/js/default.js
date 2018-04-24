@@ -10,6 +10,13 @@ head.js('/resource/common/lib/My97DatePicker/4.8/WdatePicker.js');//列表组件
 head.js('/resource/common/lib/datatables/1.10.0/jquery.dataTables.min.js');//列表组件
 head.js('/resource/common/lib/base/fn-dataTable.js');//列表组件
 head.js('/resource/common/lib/base/fn-layer.js');//弹窗组件
+head.js('/resource/common/lib/jquery-treegrid/extension/jquery.treegrid.extension.js');//树列表
+head.js('/resource/common/lib/jquery-treegrid/js/jquery.treegrid.min.js');//树列表
+head.js('/resource/common/lib/base/ztree-object.js');//树列表
+head.js('/resource/common/lib/base/tree-table-object.js');//树列表
+head.js('/resource/common/js/menu/menuall.js');//弹窗组件
+
+
 
 
 

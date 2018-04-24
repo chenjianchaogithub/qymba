@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="Bookmark" href="/favicon.ico" />
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+
+	<link rel="stylesheet" type="text/css" href="/resource/common/css/default.css"  th:href="@{/resource/common/css/default.css}"/>
+	<!--<link href="/resource/common/lib/jquery-treegrid/css/ztree/zTreeStyle.css" rel="stylesheet">-->
+
+	<script type="text/javascript" src="/resource/common/lib/head/head.min.js"
+			th:src="@{/resource/common/lib/head/head.min.js}"></script>
+	<script type="text/javascript" src="/resource/common/js/default.js"
+			th:src="@{/resource/common/js/default.js}"></script>
+	<!--<script type="text/javascript" src="/resource/common/js/menu/menuall.js"
+			th:src="@{/resource/common/js/menu/menuall.js}"></script>-->
+
+	<script type="text/javascript">
+
+        head.ready(function () {
+            var defaultColunms = Menu.initColumn();
+            var table = new BSTreeTable(Menu.id, "/menu/ajax.html", defaultColunms);
+            table.setExpandColumn(2);
+            table.setIdField("id");
+            table.setCodeField("code");
+            table.setParentCodeField("pcode");
+            table.setExpandAll(true);
+            table.init();
+            Menu.table = table;
+        });
+
+	</script>
+
+<title>产品分类</title>
+</head>
+<body class="pos-r">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c"> 日期范围：
+		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;"/>
+		-
+		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;"/>
+		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name=""/>
+		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<span class="l">
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+			<a href="javascript:;" onclick="admin_add('添加管理员','add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+		</span>
+		<span class="r">共有数据：<strong>54</strong> 条</span>
+	</div>
+<table id="menuTable"></table>
+</div>
+</body>
+</html>
