@@ -25,7 +25,7 @@
     state, dialog, curr, code, pcode, stid
   </sql>
 
-  <!-- 用户正常登录后的菜单 -->
+  <!-- 查询所有菜单 -->
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

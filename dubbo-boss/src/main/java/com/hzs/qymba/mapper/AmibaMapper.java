@@ -2,6 +2,8 @@ package com.hzs.qymba.mapper;
 
 import com.hzs.qymba.model.Amiba;
 
+import java.util.List;
+
 public interface AmibaMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,10 @@ public interface AmibaMapper {
     int updateByPrimaryKeySelective(Amiba record);
 
     int updateByPrimaryKey(Amiba record);
+
+    /**
+     * 查询所有菜单
+     * @return
+     */
+    List<Amiba> selectAll();
 }

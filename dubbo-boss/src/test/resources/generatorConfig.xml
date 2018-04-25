@@ -53,7 +53,7 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="amiba_t" domainObjectName="Amiba"
+        <table tableName="company_t" domainObjectName="Company"
         		enableCountByExample="false" 
         		enableSelectByExample="false" 
         		enableUpdateByExample="false" 

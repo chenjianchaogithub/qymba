@@ -10,10 +10,21 @@
     <result column="addDate" property="adddate" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="stid" property="stid" jdbcType="BIGINT" />
+    <result column="isDel" property="isdel" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, parentId, companyId, name, state, addDate, remark, stid
   </sql>
+
+  <!-- 查询所有 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dept_t
+    where isDel = 0
+    order by parentId
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

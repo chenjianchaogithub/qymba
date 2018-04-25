@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzs.qymba.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.hzs.qymba.model.Company" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parentId" property="parentid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="isDel" property="isdel" jdbcType="INTEGER" />
+    <result column="addDate" property="adddate" jdbcType="TIMESTAMP" />
+    <result column="editDate" property="editdate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="isDoBalance" property="isdobalance" jdbcType="BIT" />
+    <result column="isDoTax" property="isdotax" jdbcType="BIT" />
+    <result column="maxTaxRate" property="maxtaxrate" jdbcType="REAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parentId, name, isDel, addDate, editDate, remark, isDoBalance, isDoTax, maxTaxRate,state
+  </sql>
+
+  <!-- 查询所有 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_t
+    where state = 0
+    order by parentId
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from company_t
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from company_t
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hzs.qymba.model.Company" >
+    insert into company_t (id, parentId, name, 
+      isDel, addDate, editDate, 
+      remark, isDoBalance, isDoTax, 
+      maxTaxRate)
+    values (#{id,jdbcType=BIGINT}, #{parentid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{isdel,jdbcType=INTEGER}, #{adddate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{isdobalance,jdbcType=BIT}, #{isdotax,jdbcType=BIT}, 
+      #{maxtaxrate,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzs.qymba.model.Company" >
+    insert into company_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+      <if test="adddate != null" >
+        addDate,
+      </if>
+      <if test="editdate != null" >
+        editDate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isdobalance != null" >
+        isDoBalance,
+      </if>
+      <if test="isdotax != null" >
+        isDoTax,
+      </if>
+      <if test="maxtaxrate != null" >
+        maxTaxRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isdobalance != null" >
+        #{isdobalance,jdbcType=BIT},
+      </if>
+      <if test="isdotax != null" >
+        #{isdotax,jdbcType=BIT},
+      </if>
+      <if test="maxtaxrate != null" >
+        #{maxtaxrate,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzs.qymba.model.Company" >
+    update company_t
+    <set >
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="adddate != null" >
+        addDate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editdate != null" >
+        editDate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isdobalance != null" >
+        isDoBalance = #{isdobalance,jdbcType=BIT},
+      </if>
+      <if test="isdotax != null" >
+        isDoTax = #{isdotax,jdbcType=BIT},
+      </if>
+      <if test="maxtaxrate != null" >
+        maxTaxRate = #{maxtaxrate,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzs.qymba.model.Company" >
+    update company_t
+    set parentId = #{parentid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      isDel = #{isdel,jdbcType=INTEGER},
+      addDate = #{adddate,jdbcType=TIMESTAMP},
+      editDate = #{editdate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      isDoBalance = #{isdobalance,jdbcType=BIT},
+      isDoTax = #{isdotax,jdbcType=BIT},
+      maxTaxRate = #{maxtaxrate,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

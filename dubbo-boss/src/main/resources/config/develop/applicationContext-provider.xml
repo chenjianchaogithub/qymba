@@ -30,15 +30,20 @@
 	<!-- 
 	 <dubbo:annotation package="com.jt.dubbo.cart.rest.service.impl" />
  	-->
-	<dubbo:annotation package="com.hzs.qymba" />
+	<dubbo:annotation package="com.hzs" />
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="com.hzs.qymba.api.StudentApi" ref="studentBiz" group="student-min" version="1.0.0" timeout="100000"/>
 
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.hzs.qymba.api.UserApi" ref="userBiz" group="user-min" version="1.0.0" timeout="100000"/>
 
-	<!-- 用户服务接口 -->
+	<!-- 菜单服务接口 -->
 	<dubbo:service interface="com.hzs.qymba.api.MenuApi" ref="menuBiz" group="menu-min" version="1.0.0" timeout="100000"/>
 
+	<!-- 组织机构服务接口 -->
+	<dubbo:service interface="com.hzs.qymba.api.CompanyApi" ref="companyBiz" group="company-min" version="1.0.0" timeout="100000"/>
+
+	<dubbo:service interface="com.hzs.qymba.api.DeptApi" ref="deptBiz" group="dept-min" version="1.0.0" timeout="100000"/>
+
+	<dubbo:service interface="com.hzs.qymba.api.AmibaApi" ref="amibaBiz" group="amiba-min" version="1.0.0" timeout="100000"/>
 
 </beans>

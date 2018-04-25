@@ -2,6 +2,8 @@ package com.hzs.qymba.mapper;
 
 import com.hzs.qymba.model.Dept;
 
+import java.util.List;
+
 public interface DeptMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,10 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+
+    /**
+     * 查询所有菜单
+     * @return
+     */
+    List<Dept> selectAll();
 }
