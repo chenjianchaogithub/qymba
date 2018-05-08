@@ -46,4 +46,8 @@
 
 	<dubbo:service interface="com.hzs.qymba.api.AmibaApi" ref="amibaBiz" group="amiba-min" version="1.0.0" timeout="100000"/>
 
+	<dubbo:service interface="com.hzs.qymba.api.RoleApi" ref="roleBiz" group="role-min" version="1.0.0" timeout="100000"/>
+
+	<dubbo:service interface="com.hzs.qymba.api.PermissionApi" ref="permissionBiz" group="permission-min" version="1.0.0" timeout="100000"/>
+
 </beans>

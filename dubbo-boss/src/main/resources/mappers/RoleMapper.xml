@@ -15,6 +15,76 @@
   <sql id="Base_Column_List" >
     id, grouping, name, code, sign, description, state, stid, type
   </sql>
+
+
+  <!-- 分页列表的信息 -->
+  <sql id="Page_Column_List">
+    id, grouping, name, code, sign, description, state, stid, type
+  </sql>
+
+  <sql id="Role_List_Page">
+    <where>
+
+
+      <if test="keyword!=null and keyword!=''">
+        AND
+        <foreach collection="keyword" item="keyword"
+                 separator="OR" open="(" close=")" index="">
+          name LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+          OR name LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+        </foreach>
+      </if>
+      <if test="stid!=null and stid!='' " >
+        AND stid = #{stid, jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+
+  <!-- 查找所有可用的用户 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT
+    <include refid="Page_Column_List" />
+    FROM role_t
+    <where>
+
+    </where>
+
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Long">
+    SELECT count(id) FROM role_t
+
+    <include refid="Role_List_Page" />
+  </select>
+
+  <!-- 后台用户列表显示 SQL-->
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    SELECT <include refid="Page_Column_List" />
+    FROM role_t
+
+    <include refid="Role_List_Page" />
+
+    <if test="sortName!=null and sortName!='' ">
+      Order By id DESC,Convert(${sortName} using GBK) ${sortOrder}
+    </if>
+    <if test="sortName==null or sortName=='' ">
+      ORDER BY role_t.id DESC
+    </if>
+    <if test="startCount!=null and pageSize!=null" >
+      LIMIT ${startCount}, ${pageSize}
+    </if>
+  </select>
+
+  <!-- 根据用户id,查询授权的权限点 -->
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from role_t
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

@@ -1,5 +1,6 @@
 package com.hzs.qymba.service.impl;
 
+import com.core.generic.GenericServiceImpl;
 import com.hzs.qymba.mapper.UserMapper;
 import com.hzs.qymba.model.User;
 import com.hzs.qymba.service.UserService;
@@ -13,9 +14,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 @Service
-public class UserServiceImpl implements UserService {
-    @Resource
-    private UserMapper userMapper;
+public class UserServiceImpl extends GenericServiceImpl<UserMapper, User> implements UserService {
+
 
     @Override
     public User authentication(AuthenticationToken token) throws AuthenticationException {
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
         // 查数据库
         try {
 
-            final User user = userMapper.authentication(username, password);
+            final User user = this.baseMapper.authentication(username, password);
             // 用户信息有问题
            /* if (user == null)
                 throw new AuthenticationException(G.getMsg("user.login.err.token"));*/
@@ -41,22 +41,22 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> selectAll(){
-        return userMapper.selectAll();
+        return this.baseMapper.selectAll();
     }
 
 
     @Override
     public long selectCount(ParamMap param) {
-        return userMapper.selectCount(param);
+        return this.baseMapper.selectCount(param);
     }
 
     @Override
     public List<User> selectList(ParamMap param) {
-        return userMapper.selectList(param);
+        return this.baseMapper.selectList(param);
     }
 
     @Override
     public User selectByUserId(Long id) {
-        return userMapper.selectByUserId(id);
+        return this.baseMapper.selectByUserId(id);
     }
 }

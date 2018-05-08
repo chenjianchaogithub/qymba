@@ -13,6 +13,41 @@
   <sql id="Base_Column_List" >
     id, grouping, name, code, sign, description, stid
   </sql>
+
+  <!-- 分页列表的信息 -->
+  <sql id="Page_Column_List">
+    id, grouping, name, code, sign, description
+  </sql>
+
+  <!-- 条件信息 -->
+  <sql id="Permission_List_Page">
+    <where>1=1</where>
+  </sql>
+  <select id="selectCount" resultType="java.lang.Long">
+    SELECT count(id) FROM permission_t
+
+    <include refid="Permission_List_Page" />
+  </select>
+
+  <!-- 后台用户列表显示 SQL-->
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    SELECT <include refid="Page_Column_List" />
+    FROM permission_t
+
+    <include refid="Permission_List_Page" />
+
+    <if test="sortName!=null and sortName!='' ">
+      Order By id DESC,Convert(${sortName} using GBK) ${sortOrder}
+    </if>
+    <if test="sortName==null or sortName=='' ">
+      ORDER BY permission_t.id DESC
+    </if>
+    <if test="startCount!=null and pageSize!=null" >
+      LIMIT ${startCount}, ${pageSize}
+    </if>
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

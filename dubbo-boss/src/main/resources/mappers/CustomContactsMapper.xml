@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzs.qymba.mapper.CustomContactsMapper" >
+  <resultMap id="BaseResultMap" type="com.hzs.qymba.model.CustomContacts" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customId" property="customid" jdbcType="BIGINT" />
+    <result column="contactsName" property="contactsname" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="isDel" property="isdel" jdbcType="BIT" />
+    <result column="addDate" property="adddate" jdbcType="TIMESTAMP" />
+    <result column="createId" property="createid" jdbcType="BIGINT" />
+    <result column="createName" property="createname" jdbcType="VARCHAR" />
+    <result column="editDate" property="editdate" jdbcType="TIMESTAMP" />
+    <result column="editId" property="editid" jdbcType="BIGINT" />
+    <result column="editName" property="editname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customId, contactsName, mobile, phone, post, remark, state, isDel, addDate, createId, 
+    createName, editDate, editId, editName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from custom_contacts_t
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from custom_contacts_t
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hzs.qymba.model.CustomContacts" >
+    insert into custom_contacts_t (id, customId, contactsName, 
+      mobile, phone, post, 
+      remark, state, isDel, addDate, 
+      createId, createName, editDate, 
+      editId, editName)
+    values (#{id,jdbcType=BIGINT}, #{customid,jdbcType=BIGINT}, #{contactsname,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{isdel,jdbcType=BIT}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{createid,jdbcType=BIGINT}, #{createname,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{editid,jdbcType=BIGINT}, #{editname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzs.qymba.model.CustomContacts" >
+    insert into custom_contacts_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customid != null" >
+        customId,
+      </if>
+      <if test="contactsname != null" >
+        contactsName,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+      <if test="adddate != null" >
+        addDate,
+      </if>
+      <if test="createid != null" >
+        createId,
+      </if>
+      <if test="createname != null" >
+        createName,
+      </if>
+      <if test="editdate != null" >
+        editDate,
+      </if>
+      <if test="editid != null" >
+        editId,
+      </if>
+      <if test="editname != null" >
+        editName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customid != null" >
+        #{customid,jdbcType=BIGINT},
+      </if>
+      <if test="contactsname != null" >
+        #{contactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=BIT},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="createname != null" >
+        #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editid != null" >
+        #{editid,jdbcType=BIGINT},
+      </if>
+      <if test="editname != null" >
+        #{editname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzs.qymba.model.CustomContacts" >
+    update custom_contacts_t
+    <set >
+      <if test="customid != null" >
+        customId = #{customid,jdbcType=BIGINT},
+      </if>
+      <if test="contactsname != null" >
+        contactsName = #{contactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=BIT},
+      </if>
+      <if test="adddate != null" >
+        addDate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null" >
+        createId = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="createname != null" >
+        createName = #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        editDate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editid != null" >
+        editId = #{editid,jdbcType=BIGINT},
+      </if>
+      <if test="editname != null" >
+        editName = #{editname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzs.qymba.model.CustomContacts" >
+    update custom_contacts_t
+    set customId = #{customid,jdbcType=BIGINT},
+      contactsName = #{contactsname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      isDel = #{isdel,jdbcType=BIT},
+      addDate = #{adddate,jdbcType=TIMESTAMP},
+      createId = #{createid,jdbcType=BIGINT},
+      createName = #{createname,jdbcType=VARCHAR},
+      editDate = #{editdate,jdbcType=TIMESTAMP},
+      editId = #{editid,jdbcType=BIGINT},
+      editName = #{editname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

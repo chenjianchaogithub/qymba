@@ -1,24 +1,14 @@
 package com.hzs.qymba.mapper;
 
 
+import com.core.generic.GenericMapper;
 import com.hzs.qymba.model.User;
 import com.util.ParamMap;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+public interface UserMapper extends GenericMapper<User>{
 
     /**
      * 身份验证

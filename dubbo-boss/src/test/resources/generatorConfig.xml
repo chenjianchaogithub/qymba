@@ -53,7 +53,7 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="company_t" domainObjectName="Company"
+        <table tableName="custom_contacts_t" domainObjectName="CustomContacts"
         		enableCountByExample="false" 
         		enableSelectByExample="false" 
         		enableUpdateByExample="false" 

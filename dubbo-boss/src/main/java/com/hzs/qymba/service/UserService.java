@@ -1,5 +1,6 @@
 package com.hzs.qymba.service;
 
+import com.core.generic.GenericService;
 import com.hzs.qymba.model.User;
 import com.util.ParamMap;
 import org.apache.shiro.authc.AuthenticationException;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public interface UserService {
+public interface UserService extends GenericService<User> {
 
     /**
      * 用户验证
@@ -48,4 +49,5 @@ public interface UserService {
      * @return
      */
     User selectByUserId(Long id);
+
 }
