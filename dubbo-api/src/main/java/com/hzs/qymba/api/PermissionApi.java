@@ -30,4 +30,12 @@ public interface PermissionApi {
      * @return
      */
     PermissionDTO selectByPermissionId(Long id);
+
+    /**
+     * 检查是否存在相同的值
+     * @param column
+     * @param val
+     * @return
+     */
+    int checkName(String column,String val);
 }

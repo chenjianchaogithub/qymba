@@ -24,6 +24,7 @@ public class PermissionController extends GenericController{
     private static Logger logger = LoggerFactory.getLogger(PermissionController.class);
 
 
+
     @Resource
     private PermissionApi permissionApi;
     /**
@@ -52,6 +53,17 @@ public class PermissionController extends GenericController{
         // 选择用于过滤该类型用户列表的视图类
         return  jsonView(permissionApi.selectPager(param),BaseRegular.BaseList.class);
         //return map;
+    }
+
+    /**
+     * 检查是否存在相同的值
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/checkName", method = RequestMethod.POST)
+    public @ResponseBody Object checkName(HttpServletRequest request){
+
+        return 0;
     }
 
 }
